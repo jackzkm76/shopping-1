@@ -5,13 +5,7 @@
     }
   },
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/api/index.php?path=index.php"
-    },
-    {
-      "source": "/(.*\\.php)",
-      "destination": "/api/index.php?path=$1"
-    }
+    { "source": "/", "destination": "/api/index.php?path=index.php" },
+    { "source": "/(.*\\.php)", "destination": "/api/index.php?path=$1" }
   ]
 }
