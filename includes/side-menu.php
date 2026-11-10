@@ -8,8 +8,8 @@ include('config.php'); // ✅ Replace 'config.php' with your actual DB connectio
         <ul class="nav">
             <li class="dropdown menu-item">
                 <?php 
-                $sql = mysqli_query($con, "SELECT id, categoryName FROM category");
-                while($row = mysqli_fetch_array($sql)) {
+                $sql = db_query($con, "SELECT id, categoryName FROM category");
+                while($row = db_fetch_array($sql)) {
                 ?>
                     <a href="category.php?cid=<?php echo $row['id'];?>" class="dropdown-toggle">
                         <i class="icon fa fa-desktop fa-fw"></i>

@@ -8,9 +8,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 		$_SESSION['cart'][$id]['quantity']++;
 	}else{
 		$sql_p="SELECT * FROM products WHERE id={$id}";
-		$query_p=mysqli_query($con,$sql_p);
-		if(mysqli_num_rows($query_p)!=0){
-			$row_p=mysqli_fetch_array($query_p);
+		$query_p=db_query($con,$sql_p);
+		if(db_num_rows($query_p)!=0){
+			$row_p=db_fetch_array($query_p);
 			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
 			header('location:my-cart.php');
 		}else{
@@ -26,7 +26,7 @@ header('location:login.php');
 }
 else
 {
-mysqli_query($con,"insert into wishlist(userId,productId) values('".$_SESSION['id']."','$pid')");
+db_query($con,"insert into wishlist(userId,productId) values('".$_SESSION['id']."','$pid')");
 echo "<script>alert('Product aaded in wishlist');</script>";
 header('location:my-wishlist.php');
 
@@ -40,7 +40,7 @@ if(isset($_POST['submit']))
 	$name=$_POST['name'];
 	$summary=$_POST['summary'];
 	$review=$_POST['review'];
-	mysqli_query($con,"insert into productreviews(productId,quality,price,value,name,summary,review) values('$pid','$qty','$price','$value','$name','$summary','$review')");
+	db_query($con,"insert into productreviews(productId,quality,price,value,name,summary,review) values('$pid','$qty','$price','$value','$name','$summary','$review')");
 }
 
 
@@ -97,8 +97,8 @@ if(isset($_POST['submit']))
 	<div class="container">
 		<div class="breadcrumb-inner">
 <?php
-$ret=mysqli_query($con,"select category.categoryName as catname,subCategory.subcategory as subcatname,products.productName as pname from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory where products.id='$pid'");
-while ($rw=mysqli_fetch_array($ret)) {
+$ret=db_query($con,"select category.categoryName as catname,subCategory.subcategory as subcatname,products.productName as pname from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory where products.id='$pid'");
+while ($rw=db_fetch_array($ret)) {
 
 ?>
 
@@ -126,8 +126,8 @@ while ($rw=mysqli_fetch_array($ret)) {
 	<div class="sidebar-widget-body m-t-10">
 		<div class="accordion">
 
-		            <?php $sql=mysqli_query($con,"select id,categoryName  from category");
-while($row=mysqli_fetch_array($sql))
+		            <?php $sql=db_query($con,"select id,categoryName  from category");
+while($row=db_fetch_array($sql))
 {
     ?>
 	    	<div class="accordion-group">
@@ -148,8 +148,8 @@ while($row=mysqli_fetch_array($sql))
 	<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
 		
 								   <?php
-$ret=mysqli_query($con,"select * from products order by rand() limit 4 ");
-while ($rws=mysqli_fetch_array($ret)) {
+$ret=db_query($con,"select * from products order by random() limit 4 ");
+while ($rws=db_fetch_array($ret)) {
 
 ?>
 
@@ -204,8 +204,8 @@ while ($rws=mysqli_fetch_array($ret)) {
 				</div>
 			</div><!-- /.sidebar -->
 <?php 
-$ret=mysqli_query($con,"select * from products where id='$pid'");
-while($row=mysqli_fetch_array($ret))
+$ret=db_query($con,"select * from products where id='$pid'");
+while($row=db_fetch_array($ret))
 {
 
 ?>
@@ -287,8 +287,8 @@ while($row=mysqli_fetch_array($ret))
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
 							<h1 class="name"><?php echo htmlentities($row['productName']);?></h1>
-<?php $rt=mysqli_query($con,"select * from productreviews where productId='$pid'");
-$num=mysqli_num_rows($rt);
+<?php $rt=db_query($con,"select * from productreviews where productId='$pid'");
+$num=db_num_rows($rt);
 {
 ?>		
 							<div class="rating-reviews m-t-20">
@@ -440,8 +440,8 @@ $num=mysqli_num_rows($rt);
 																				
 										<div class="product-reviews">
 											<h4 class="title">Customer Reviews</h4>
-<?php $qry=mysqli_query($con,"select * from productreviews where productId='$pid'");
-while($rvw=mysqli_fetch_array($qry))
+<?php $qry=db_query($con,"select * from productreviews where productId='$pid'");
+while($rvw=db_fetch_array($qry))
 {
 ?>
 
@@ -559,8 +559,8 @@ while($rvw=mysqli_fetch_array($qry))
 	<div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
 	   
 		<?php 
-$qry=mysqli_query($con,"select * from products where subCategory='$subcid' and category='$cid'");
-while($rw=mysqli_fetch_array($qry))
+$qry=db_query($con,"select * from products where subCategory='$subcid' and category='$cid'");
+while($rw=db_fetch_array($qry))
 {
 
 			?>	

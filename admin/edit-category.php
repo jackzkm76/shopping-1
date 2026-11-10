@@ -16,7 +16,7 @@ if(isset($_POST['submit']))
 	$category=$_POST['category'];
 	$description=$_POST['description'];
 	$id=intval($_GET['id']);
-$sql=mysqli_query($con,"update category set categoryName='$category',categoryDescription='$description',updationDate='$currentTime' where id='$id'");
+$sql=db_query($con,"update category set categoryName='$category',categoryDescription='$description',updationDate='$currentTime' where id='$id'");
 $_SESSION['msg']="Category Updated !!";
 
 }
@@ -64,8 +64,8 @@ $_SESSION['msg']="Category Updated !!";
 			<form class="form-horizontal row-fluid" name="Category" method="post" >
 <?php
 $id=intval($_GET['id']);
-$query=mysqli_query($con,"select * from category where id='$id'");
-while($row=mysqli_fetch_array($query))
+$query=db_query($con,"select * from category where id='$id'");
+while($row=db_fetch_array($query))
 {
 ?>									
 <div class="control-group">

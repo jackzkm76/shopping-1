@@ -3,15 +3,15 @@ session_start();
 include('includes/config.php');
 
 // Get order_id from GET (e.g., payment-mpesa.php?id=123)
-$order_id = isset($_GET['order_id']) ? mysqli_real_escape_string($con, $_GET['order_id']) : '';
+$order_id = isset($_GET['order_id']) ? db_escape($con, $_GET['order_id']) : '';
 
 // Handle manual confirmation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_payment'])) {
-    $order_id = mysqli_real_escape_string($con, $_POST['order_id']);
+    $order_id = db_escape($con, $_POST['order_id']);
 
     // Update order status to 'Paid'
-    $update = "UPDATE orders SET orderstatus='Paid' WHERE order_id='$order_id'";
-    if (mysqli_query($con, $update)) {
+    $update = "UPDATE orders SET orderstatus='Paid' WHERE id='$order_id'";
+    if (db_query($con, $update)) {
         echo "<script>alert('Thank you! Your payment has been confirmed.');</script>";
         echo "<script>window.location.href='index.php?orders';</script>";
         exit();

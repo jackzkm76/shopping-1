@@ -12,7 +12,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 if(isset($_GET['del']))
 		  {
-		          mysqli_query($con,"delete from products where id = '".$_GET['id']."'");
+		          db_query($con,"delete from products where id = '".$_GET['id']."'");
                   $_SESSION['delmsg']="Product deleted !!";
 		  }
 
@@ -70,9 +70,9 @@ if(isset($_GET['del']))
 									</thead>
 									<tbody>
 
-<?php $query=mysqli_query($con,"select * from users");
+<?php $query=db_query($con,"select * from users");
 $cnt=1;
-while($row=mysqli_fetch_array($query))
+while($row=db_fetch_array($query))
 {
 ?>									
 										<tr>

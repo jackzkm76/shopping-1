@@ -48,8 +48,7 @@ if (isset($response['state']) && $response['state'] === 'approved') {
 
     if ($order_id) {
         $stmt = $con->prepare("UPDATE payments SET status='approved', paypal_payment_id=? WHERE order_id=?");
-        $stmt->bind_param("ss", $paymentId, $order_id);
-        $stmt->execute();
+        $stmt->execute([$paymentId, $order_id]);
 
         echo "<h2>Payment successful for Order #$order_id!</h2>";
     } else {

@@ -15,14 +15,14 @@ if(isset($_POST['submit']))
 {
 	$category=$_POST['category'];
 	$description=$_POST['description'];
-$sql=mysqli_query($con,"insert into category(categoryName,categoryDescription) values('$category','$description')");
+$sql=db_query($con,"insert into category(categoryName,categoryDescription) values('$category','$description')");
 $_SESSION['msg']="Category Created !!";
 
 }
 
 if(isset($_GET['del']))
 		  {
-		          mysqli_query($con,"delete from category where id = '".$_GET['id']."'");
+		          db_query($con,"delete from category where id = '".$_GET['id']."'");
                   $_SESSION['delmsg']="Category deleted !!";
 		  }
 
@@ -119,9 +119,9 @@ if(isset($_GET['del']))
 									</thead>
 									<tbody>
 
-<?php $query=mysqli_query($con,"select * from category");
+<?php $query=db_query($con,"select * from category");
 $cnt=1;
-while($row=mysqli_fetch_array($query))
+while($row=db_fetch_array($query))
 {
 ?>									
 										<tr>

@@ -11,20 +11,20 @@ else{
 $wid=intval($_GET['del']);
 if(isset($_GET['del']))
 {
-$query=mysqli_query($con,"delete from wishlist where id='$wid'");
+$query=db_query($con,"delete from wishlist where id='$wid'");
 }
 
 
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
-	$query=mysqli_query($con,"delete from wishlist where productId='$id'");
+	$query=db_query($con,"delete from wishlist where productId='$id'");
 	if(isset($_SESSION['cart'][$id])){
 		$_SESSION['cart'][$id]['quantity']++;
 	}else{
 		$sql_p="SELECT * FROM products WHERE id={$id}";
-		$query_p=mysqli_query($con,$sql_p);
-		if(mysqli_num_rows($query_p)!=0){
-			$row_p=mysqli_fetch_array($query_p);
+		$query_p=db_query($con,$sql_p);
+		if(db_num_rows($query_p)!=0){
+			$row_p=db_fetch_array($query_p);
 			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);	
 header('location:my-wishlist.php');
 }
@@ -118,11 +118,11 @@ header('location:my-wishlist.php');
 			</thead>
 			<tbody>
 <?php
-$ret=mysqli_query($con,"select products.productName as pname,products.productName as proid,products.productImage1 as pimage,products.productPrice as pprice,wishlist.productId as pid,wishlist.id as wid from wishlist join products on products.id=wishlist.productId where wishlist.userId='".$_SESSION['id']."'");
-$num=mysqli_num_rows($ret);
+$ret=db_query($con,"select products.productName as pname,products.productName as proid,products.productImage1 as pimage,products.productPrice as pprice,wishlist.productId as pid,wishlist.id as wid from wishlist join products on products.id=wishlist.productId where wishlist.userId='".$_SESSION['id']."'");
+$num=db_num_rows($ret);
 	if($num>0)
 	{
-while ($row=mysqli_fetch_array($ret)) {
+while ($row=db_fetch_array($ret)) {
 
 ?>
 
@@ -130,8 +130,8 @@ while ($row=mysqli_fetch_array($ret)) {
 					<td class="col-md-2"><img src="admin/productimages/<?php echo htmlentities($row['pid']);?>/<?php echo htmlentities($row['pimage']);?>" alt="<?php echo htmlentities($row['pname']);?>" width="60" height="100"></td>
 					<td class="col-md-6">
 						<div class="product-name"><a href="product-details.php?pid=<?php echo htmlentities($pd=$row['pid']);?>"><?php echo htmlentities($row['pname']);?></a></div>
-<?php $rt=mysqli_query($con,"select * from productreviews where productId='$pd'");
-$num=mysqli_num_rows($rt);
+<?php $rt=db_query($con,"select * from productreviews where productId='$pd'");
+$num=db_num_rows($rt);
 {
 ?>
 

@@ -19,8 +19,8 @@
 $from=date('Y-m-d')." ".$f1;
 $t1="23:59:59";
 $to=date('Y-m-d')." ".$t1;
- $result = mysqli_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
-$num_rows1 = mysqli_num_rows($result);
+ $result = db_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
+$num_rows1 = db_num_rows($result);
 {
 ?>
 											<b class="label orange pull-right"><?php echo htmlentities($num_rows1); ?></b>
@@ -33,8 +33,8 @@ $num_rows1 = mysqli_num_rows($result);
 											Pending Orders
 										<?php	
 	$status='Delivered';									 
-$ret = mysqli_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
-$num = mysqli_num_rows($ret);
+$ret = db_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
+$num = db_num_rows($ret);
 {?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
 <?php } ?>
 										</a>
@@ -45,8 +45,8 @@ $num = mysqli_num_rows($ret);
 											Delivered Orders
 								<?php	
 	$status='Delivered';									 
-$rt = mysqli_query($con,"SELECT * FROM Orders where orderStatus='$status'");
-$num1 = mysqli_num_rows($rt);
+$rt = db_query($con,"SELECT * FROM Orders where orderStatus='$status'");
+$num1 = db_num_rows($rt);
 {?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
 <?php } ?>
 

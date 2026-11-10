@@ -11,14 +11,14 @@ if(isset($_POST['submit']))
 {
 	$category=$_POST['category'];
 	$subcat=$_POST['subcategory'];
-$sql=mysqli_query($con,"insert into subcategory(categoryid,subcategory) values('$category','$subcat')");
+$sql=db_query($con,"insert into subcategory(categoryid,subcategory) values('$category','$subcat')");
 $_SESSION['msg']="SubCategory Created !!";
 
 }
 
 if(isset($_GET['del']))
 		  {
-		          mysqli_query($con,"delete from subcategory where id = '".$_GET['id']."'");
+		          db_query($con,"delete from subcategory where id = '".$_GET['id']."'");
                   $_SESSION['delmsg']="SubCategory deleted !!";
 		  }
 
@@ -77,8 +77,8 @@ if(isset($_GET['del']))
 <div class="controls">
 <select name="category" class="span8 tip" required>
 <option value="">Select Category</option> 
-<?php $query=mysqli_query($con,"select * from category");
-while($row=mysqli_fetch_array($query))
+<?php $query=db_query($con,"select * from category");
+while($row=db_fetch_array($query))
 {?>
 
 <option value="<?php echo $row['id'];?>"><?php echo $row['categoryName'];?></option>
@@ -125,9 +125,9 @@ while($row=mysqli_fetch_array($query))
 									</thead>
 									<tbody>
 
-<?php $query=mysqli_query($con,"select subcategory.id,category.categoryName,subcategory.subcategory,subcategory.creationDate,subcategory.updationDate from subcategory join category on category.id=subcategory.categoryid");
+<?php $query=db_query($con,"select subcategory.id,category.categoryName,subcategory.subcategory,subcategory.creationDate,subcategory.updationDate from subcategory join category on category.id=subcategory.categoryid");
 $cnt=1;
-while($row=mysqli_fetch_array($query))
+while($row=db_fetch_array($query))
 {
 ?>									
 										<tr>

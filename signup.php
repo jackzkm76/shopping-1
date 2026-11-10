@@ -11,7 +11,7 @@ if(isset($_POST['submit']))
     $contactno=$_POST['contactno'];
     $password=md5($_POST['password']);
 
-    $query=mysqli_query($con,"insert into users(name,email,contactno,password) values('$name','$email','$contactno','$password')");
+    $query=db_query($con,"insert into users(name,email,contactno,password) values('$name','$email','$contactno','$password')");
     if($query)
     {
         echo "<script>alert('You are successfully register');</script>";

@@ -12,8 +12,8 @@ if(isset($_POST['submit2'])){
 $status=$_POST['status'];
 $remark=$_POST['remark'];//space char
 
-$query=mysqli_query($con,"insert into ordertrackhistory(orderId,status,remark) values('$oid','$status','$remark')");
-$sql=mysqli_query($con,"update orders set orderStatus='$status' where id='$oid'");
+$query=db_query($con,"insert into ordertrackhistory(orderId,status,remark) values('$oid','$status','$remark')");
+$sql=db_query($con,"update orders set orderStatus='$status' where id='$oid'");
 echo "<script>alert('Order updated sucessfully...');</script>";
 //}
 }
@@ -52,8 +52,8 @@ window.print();
       <td  class="fontkink"><?php echo $oid;?></td>
     </tr>
     <?php 
-$ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'");
-     while($row=mysqli_fetch_array($ret))
+$ret = db_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'");
+     while($row=db_fetch_array($ret))
       {
      ?>
 		
@@ -79,8 +79,8 @@ $ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'")
    <?php } ?>
    <?php 
 $st='Delivered';
-   $rt = mysqli_query($con,"SELECT * FROM orders WHERE id='$oid'");
-     while($num=mysqli_fetch_array($rt))
+   $rt = db_query($con,"SELECT * FROM orders WHERE id='$oid'");
+     while($num=db_fetch_array($rt))
      {
      $currrentSt=$num['orderStatus'];
    }

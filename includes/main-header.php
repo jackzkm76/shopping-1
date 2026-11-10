@@ -72,11 +72,11 @@ if(!empty($_SESSION['cart'])){
 			$sql .=$id. ",";
 			}
 			$sql=substr($sql,0,-1) . ") ORDER BY id ASC";
-			$query = mysqli_query($con,$sql);
+			$query = db_query($con,$sql);
 			$totalprice=0;
 			$totalqunty=0;
 			if(!empty($query)){
-			while($row = mysqli_fetch_array($query)){
+			while($row = db_fetch_array($query)){
 				$quantity=$_SESSION['cart'][$row['id']]['quantity'];
 				$subtotal= $_SESSION['cart'][$row['id']]['quantity']*$row['productPrice']+$row['shippingCharge'];
 				$totalprice += $subtotal;

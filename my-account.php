@@ -11,7 +11,7 @@ else{
 	{
 		$name=$_POST['name'];
 		$contactno=$_POST['contactno'];
-		$query=mysqli_query($con,"update users set name='$name',contactno='$contactno' where id='".$_SESSION['id']."'");
+		$query=db_query($con,"update users set name='$name',contactno='$contactno' where id='".$_SESSION['id']."'");
 		if($query)
 		{
 echo "<script>alert('Your info has been updated');</script>";
@@ -25,11 +25,11 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 if(isset($_POST['submit']))
 {
-$sql=mysqli_query($con,"SELECT password FROM  users where password='".md5($_POST['cpass'])."' && id='".$_SESSION['id']."'");
-$num=mysqli_fetch_array($sql);
+$sql=db_query($con,"SELECT password FROM  users where password='".md5($_POST['cpass'])."' AND id='".$_SESSION['id']."'");
+$num=db_fetch_array($sql);
 if($num>0)
 {
- $con=mysqli_query($con,"update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where id='".$_SESSION['id']."'");
+ $con=db_query($con,"update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where id='".$_SESSION['id']."'");
 echo "<script>alert('Password Changed Successfully !!');</script>";
 }
 else
@@ -162,8 +162,8 @@ return true;
 				<div class="col-md-12 col-sm-12 already-registered-login">
 
 <?php
-$query=mysqli_query($con,"select * from users where id='".$_SESSION['id']."'");
-while($row=mysqli_fetch_array($query))
+$query=db_query($con,"select * from users where id='".$_SESSION['id']."'");
+while($row=db_fetch_array($query))
 {
 ?>
 

@@ -52,9 +52,9 @@ else{
 									</thead>
 									<tbody>
 
-<?php $query=mysqli_query($con,"select * from userlog");
+<?php $query=db_query($con,"select * from userlog");
 $cnt=1;
-while($row=mysqli_fetch_array($query))
+while($row=db_fetch_array($query))
 {
 ?>									
 										<tr>

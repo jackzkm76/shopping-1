@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
 
 
 	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$pid/".$_FILES["productimage1"]["name"]);
-	$sql=mysqli_query($con,"update  products set productImage1='$productimage1' where id='$pid' ");
+	$sql=db_query($con,"update  products set productImage1='$productimage1' where id='$pid' ");
 $_SESSION['msg']="Product Image Updated Successfully !!";
 
 }
@@ -89,9 +89,9 @@ $("#suggesstion-box").hide();
 
 <?php 
 
-$query=mysqli_query($con,"select productName,productImage1 from products where id='$pid'");
+$query=db_query($con,"select productName,productImage1 from products where id='$pid'");
 $cnt=1;
-while($row=mysqli_fetch_array($query))
+while($row=db_fetch_array($query))
 {
   
 

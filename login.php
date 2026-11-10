@@ -8,8 +8,8 @@ if(isset($_POST['login']))
 {
    $email=$_POST['email'];
    $password=md5($_POST['password']);
-   $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password='$password'");
-   $num=mysqli_fetch_array($query);
+   $query=db_query($con,"SELECT * FROM users WHERE email='$email' and password='$password'");
+   $num=db_fetch_array($query);
    if($num>0)
    {
        $extra="my-cart.php";
@@ -18,7 +18,7 @@ if(isset($_POST['login']))
        $_SESSION['username']=$num['name'];
        $uip=$_SERVER['REMOTE_ADDR'];
        $status=1;
-       $log=mysqli_query($con,"insert into userlog(userEmail,userip,status) values('".$_SESSION['login']."','$uip','$status')");
+       $log=db_query($con,"insert into userlog(userEmail,userip,status) values('".$_SESSION['login']."','$uip','$status')");
        $host=$_SERVER['HTTP_HOST'];
        $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
        header("location:http://$host$uri/$extra");
@@ -30,7 +30,7 @@ if(isset($_POST['login']))
        $email=$_POST['email'];
        $uip=$_SERVER['REMOTE_ADDR'];
        $status=0;
-       $log=mysqli_query($con,"insert into userlog(userEmail,userip,status) values('$email','$uip','$status')");
+       $log=db_query($con,"insert into userlog(userEmail,userip,status) values('$email','$uip','$status')");
        $host  = $_SERVER['HTTP_HOST'];
        $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
        header("location:http://$host$uri/$extra");

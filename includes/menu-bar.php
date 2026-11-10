@@ -17,8 +17,8 @@
 				<a href="index.php" data-hover="dropdown" class="dropdown-toggle">Home</a>
 				
 			</li>
-              <?php $sql=mysqli_query($con,"select id,categoryName  from category limit 6");
-while($row=mysqli_fetch_array($sql))
+              <?php $sql=db_query($con,"select id,categoryName  from category limit 6");
+while($row=db_fetch_array($sql))
 {
     ?>
 

@@ -1,4 +1,4 @@
-﻿<?php 
+<?php
 session_start();  
 error_reporting(0);
 include('includes/config.php');
@@ -39,7 +39,7 @@ if(isset($_POST['ordersubmit'])) {
         $value = array_combine($pdd, $quantity);
 
         foreach($value as $qty => $val34) {
-    mysqli_query($con, "INSERT INTO orders(userId, productId, quantity) VALUES('".$_SESSION['id']."','$qty','$val34')");
+    db_query($con, "INSERT INTO orders(userId, productId, quantity) VALUES('".$_SESSION['id']."','$qty','$val34')");
 }
 unset($_SESSION['cart']);
 
@@ -168,11 +168,11 @@ if(!empty($_SESSION['cart'])){
 			$sql .=$id. ",";
 			}
 			$sql=substr($sql,0,-1) . ") ORDER BY id ASC";
-			$query = mysqli_query($con,$sql);
+			$query = db_query($con,$sql);
 			$totalprice=0;
 			$totalqunty=0;
 			if(!empty($query)){
-			while($row = mysqli_fetch_array($query)){
+			while($row = db_fetch_array($query)){
 				$quantity=$_SESSION['cart'][$row['id']]['quantity'];
 				$subtotal= $_SESSION['cart'][$row['id']]['quantity']*$row['productPrice'];
 				$totalprice += $subtotal;
@@ -199,8 +199,8 @@ $_SESSION['sid']=$pd;
 								<div class="rating rateit-small"></div>
 							</div>
 							<div class="col-sm-8">
-<?php $rt=mysqli_query($con,"select * from productreviews where productId='$pd'");
-$num=mysqli_num_rows($rt);
+<?php $rt=db_query($con,"select * from productreviews where productId='$pd'");
+$num=db_num_rows($rt);
 {
 ?>
 								<div class="reviews">

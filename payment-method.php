@@ -8,7 +8,7 @@ header('location:login.php');
 }
 else{
 	if (isset($_POST['submit'])) {
-    mysqli_query($con,"UPDATE orders SET paymentMethod='".$_POST['paymethod']."' WHERE userId='".$_SESSION['id']."' AND paymentMethod IS NULL");
+    db_query($con,"UPDATE orders SET paymentMethod='".$_POST['paymethod']."' WHERE userId='".$_SESSION['id']."' AND paymentMethod IS NULL");
     unset($_SESSION['cart']);
     header('location:order-history.php');
 }

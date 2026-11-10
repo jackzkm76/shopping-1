@@ -6,8 +6,8 @@ if(isset($_POST['submit']))
 {
 	$username=$_POST['username'];
 	$password=md5($_POST['password']);
-$ret=mysqli_query($con,"SELECT * FROM admin WHERE username='$username' and password='$password'");
-$num=mysqli_fetch_array($ret);
+$ret=db_query($con,"SELECT * FROM admin WHERE username='$username' and password='$password'");
+$num=db_fetch_array($ret);
 if($num>0)
 {
 $extra="change-password.php";//
